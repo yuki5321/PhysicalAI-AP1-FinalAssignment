@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="letter_U">
+    <link name="body">
+      <inertial>
+        <pose>0 0 0.00600 0 0 0</pose>
+        <mass>0.02</mass>
+        <inertia><ixx>1.102e-05</ixx><iyy>1.102e-05</iyy><izz>2.204e-05</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <collision name="c0">
+        <pose>-0.02400 0.01333 0.00600 0 0 0.00000</pose>
+        <geometry><box><size>0.01600 0.06400 0.01200</size></box></geometry>
+        <surface>
+          <friction><ode><mu>0.3</mu><mu2>0.3</mu2></ode></friction>
+          <contact><ode><kp>1e5</kp><kd>10</kd><max_vel>0.1</max_vel><min_depth>0.0005</min_depth></ode></contact>
+        </surface>
+      </collision>
+      <visual name="v0">
+        <pose>-0.02400 0.01333 0.00600 0 0 0.00000</pose>
+        <geometry><box><size>0.01600 0.06400 0.01200</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.95 0.95 0.95 1</diffuse><emissive>0.3 0.3 0.3 1</emissive></material>
+      </visual>
+      <collision name="c1">
+        <pose>0.02400 0.01333 0.00600 0 0 0.00000</pose>
+        <geometry><box><size>0.01600 0.06400 0.01200</size></box></geometry>
+        <surface>
+          <friction><ode><mu>0.3</mu><mu2>0.3</mu2></ode></friction>
+          <contact><ode><kp>1e5</kp><kd>10</kd><max_vel>0.1</max_vel><min_depth>0.0005</min_depth></ode></contact>
+        </surface>
+      </collision>
+      <visual name="v1">
+        <pose>0.02400 0.01333 0.00600 0 0 0.00000</pose>
+        <geometry><box><size>0.01600 0.06400 0.01200</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.95 0.95 0.95 1</diffuse><emissive>0.3 0.3 0.3 1</emissive></material>
+      </visual>
+      <collision name="c2">
+        <pose>-0.00000 -0.02667 0.00600 0 0 0.00000</pose>
+        <geometry><box><size>0.06400 0.01600 0.01200</size></box></geometry>
+        <surface>
+          <friction><ode><mu>0.3</mu><mu2>0.3</mu2></ode></friction>
+          <contact><ode><kp>1e5</kp><kd>10</kd><max_vel>0.1</max_vel><min_depth>0.0005</min_depth></ode></contact>
+        </surface>
+      </collision>
+      <visual name="v2">
+        <pose>-0.00000 -0.02667 0.00600 0 0 0.00000</pose>
+        <geometry><box><size>0.06400 0.01600 0.01200</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.95 0.95 0.95 1</diffuse><emissive>0.3 0.3 0.3 1</emissive></material>
+      </visual>
+    </link>
+  </model>
+</sdf>

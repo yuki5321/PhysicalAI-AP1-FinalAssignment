@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>pa_gazebo</name>
+  <version>0.1.0</version>
+  <description>Push-Alphabet Gazebo Classic simulation: world, launch, paddle push executor, scene manager (letters, display shelf, snow) and hand actor.</description>
+  <maintainer email="noreply@example.com">push-alphabet</maintainer>
+  <license>MIT</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  <exec_depend>builtin_interfaces</exec_depend>
+  <exec_depend>gazebo_msgs</exec_depend>
+  <exec_depend>pa_interfaces</exec_depend>
+  <exec_depend>pa_core</exec_depend>
+  <exec_depend>pa_description</exec_depend>
+  <exec_depend>pa_perception</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>gazebo_ros2_control</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>joint_trajectory_controller</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>rosbridge_server</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

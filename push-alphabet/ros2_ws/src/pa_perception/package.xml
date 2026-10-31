@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>pa_perception</name>
+  <version>0.1.0</version>
+  <description>Overhead-camera letter detection and pose estimation (classical CV, or a small CNN run with onnxruntime) for Push-Alphabet.</description>
+  <maintainer email="noreply@example.com">push-alphabet</maintainer>
+  <license>MIT</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>pa_interfaces</exec_depend>
+  <exec_depend>pa_core</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <!-- CNN inference (method:=cnn|hybrid). No apt package exists; the rosdep key
+       python3-onnxruntime-pip installs the pip wheel (python3-onnxruntime does
+       not resolve). docker/Dockerfile pins onnxruntime==1.18.1 (numpy<1.25).
+       Without onnxruntime the node falls back to the classic detector. -->
+  <exec_depend>python3-onnxruntime-pip</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

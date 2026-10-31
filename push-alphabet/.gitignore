@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv*/
+*.egg-info/
+
+# colcon
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# Data / models / media (large files stay out of git)
+data/
+models/*.pt
+models/*.onnx
+*.mp4
+*.bag
+*.db3

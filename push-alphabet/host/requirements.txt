@@ -1,0 +1,7 @@
+# Windows host side of Push-Alphabet (hand_bridge.py). Python 3.10-3.12.
+mediapipe>=0.10.14,<0.11   # uses the mp.solutions.hands API
+opencv-python>=4.8
+numpy
+roslibpy>=1.6
+pyyaml
+pytest

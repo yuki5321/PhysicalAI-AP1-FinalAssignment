@@ -1,0 +1,77 @@
+# Shared geometry for the Gazebo world, the 2D push model and perception.
+# Units: meters / degrees. World frame: table center at origin, +y = "up" of the letters.
+
+workspace:
+  half_size: 0.10          # letters must stay inside |x|,|y| < half_size
+  table_half_size: 0.16    # visible table plate
+
+letter:
+  height: 0.08             # upright letter height
+  stroke: 0.016            # stroke width
+  thickness: 0.012
+  mass: 0.02
+  friction: 0.3            # letter <-> table (Coulomb)
+
+# Four servo paddles, one per side, laid out as a pinwheel. Each paddle is a
+# rigid arm rotating about a vertical axis at `pivot`. At rest (servo 0 deg)
+# the arm lies along its side, just outside the workspace; positive angles
+# sweep it counter-clockwise into the workspace.
+pushers:
+  arm_length: 0.16
+  arm_thickness: 0.008
+  arm_height: 0.03
+  max_angle: 120.0
+  speed_deg_s: 90.0        # sweep speed (SG90 is ~600 deg/s unloaded; stepped slower for fine pushes)
+  hold_s: 0.1
+  list:
+    - {name: south, pivot: [-0.100, -0.115], rest_heading: 0.0}
+    - {name: east,  pivot: [ 0.115, -0.100], rest_heading: 90.0}
+    - {name: north, pivot: [ 0.100,  0.115], rest_heading: 180.0}
+    - {name: west,  pivot: [-0.115,  0.100], rest_heading: 270.0}
+
+# Point pusher (Push-T style): a vertical cylinder that is lowered next to the
+# letter, slides in a straight line, then lifts and parks. Used instead of the
+# paddles when `pusher: point`.
+pusher_mode: point         # point | paddles
+point_pusher:
+  radius: 0.006            # cylinder radius [m]
+  height: 0.03             # cylinder length; bottom sits 1 mm above the table when lowered
+  speed: 0.05              # stroke speed [m/s]
+  max_stroke: 0.06         # longest single push [m]
+  approach: 0.01           # start this far before the first contact [m]
+  park: [0.14, 0.14, 0.10] # x, y, z when idle (corner, lifted)
+
+target:
+  x: 0.0
+  y: 0.0
+  theta: 0.0
+  pos_tol: 0.008           # aligned when below both tolerances
+  ang_tol: 6.0
+  disturb_pos: 0.015       # "崩れた" when above either threshold
+  disturb_ang: 12.0
+
+camera:
+  height: 0.45             # lens height above the table
+  width: 640
+  height_px: 640
+  hfov_deg: 42.4
+
+# Letters drawn as unions of rectangles: [cx, cy, w, h, angle_deg] in an
+# upright frame. Recentered on the area centroid at load time.
+letters:
+  I: [[0.0, 0.0, 0.016, 0.080, 0.0]]
+  U: [[-0.024, 0.008, 0.016, 0.064, 0.0],
+      [ 0.024, 0.008, 0.016, 0.064, 0.0],
+      [ 0.000, -0.032, 0.064, 0.016, 0.0]]
+  Y: [[ 0.000, -0.020, 0.016, 0.040, 0.0],
+      [-0.013,  0.020, 0.016, 0.048, 33.0],
+      [ 0.013,  0.020, 0.016, 0.048, -33.0]]
+  K: [[-0.020, 0.000, 0.016, 0.080, 0.0],
+      [ 0.007, 0.020, 0.016, 0.055, -43.5],
+      [ 0.007, -0.020, 0.016, 0.055, 43.5]]
+
+# Rotational symmetry (deg) used when measuring angle error.
+symmetry: {I: 180.0, U: 360.0, Y: 360.0, K: 360.0}
+
+sequence: "IUYK"          # order the robot works on the letters
+display_word: "YUKI"      # order on the display shelf

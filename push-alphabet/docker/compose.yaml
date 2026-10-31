@@ -1,0 +1,32 @@
+# Usage (from the repository root):
+#   docker compose -f docker/compose.yaml up -d --build
+#   open http://localhost:6080  (noVNC desktop)
+services:
+  sim:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: push-alphabet:humble
+    container_name: push-alphabet
+    ports:
+      - "6080:80"     # noVNC (the base image serves it on port 80)
+      - "9090:9090"   # rosbridge websocket for host/hand_bridge.py
+    shm_size: 512m
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - RESOLUTION=1600x900
+    volumes:
+      # Repository -> colcon source space. Paths are relative to this file.
+      - ..:/ws/src/push-alphabet
+      # Build products stay in volumes (fast, and symlink-install works on
+      # Windows hosts too). `docker compose down -v` wipes them.
+      - colcon_build:/ws/build
+      - colcon_install:/ws/install
+      - colcon_log:/ws/log
+    restart: unless-stopped
+
+volumes:
+  colcon_build:
+  colcon_install:
+  colcon_log:

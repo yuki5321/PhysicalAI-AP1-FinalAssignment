@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!-- Kinematic "hand": no gravity, moved by pa_gazebo hand_actor via /set_entity_state.
+     Link origin = palm center at the bottom of the collision boxes; fingers point +y. -->
+<sdf version="1.6">
+  <model name="hand">
+    <link name="palm">
+      <gravity>false</gravity>
+      <kinematic>true</kinematic>
+      <self_collide>false</self_collide>
+      <inertial>
+        <pose>0 0.02 0.012 0 0 0</pose>
+        <mass>0.3</mass>
+        <inertia><ixx>2e-4</ixx><iyy>2e-4</iyy><izz>3e-4</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <collision name="palm_collision">
+        <pose>0.0 0.0 0.012 0 0 0</pose>
+        <geometry><box><size>0.075 0.08 0.024</size></box></geometry>
+      </collision>
+      <visual name="palm_visual">
+        <pose>0.0 0.0 0.012 0 0 0</pose>
+        <geometry><box><size>0.075 0.08 0.024</size></box></geometry>
+        <material><ambient>0.93 0.75 0.62 1</ambient><diffuse>0.93 0.75 0.62 1</diffuse></material>
+      </visual>
+      <collision name="index_collision">
+        <pose>-0.026 0.068 0.01 0 0 0</pose>
+        <geometry><box><size>0.016 0.058 0.018</size></box></geometry>
+      </collision>
+      <visual name="index_visual">
+        <pose>-0.026 0.068 0.01 0 0 0</pose>
+        <geometry><box><size>0.016 0.058 0.018</size></box></geometry>
+        <material><ambient>0.93 0.75 0.62 1</ambient><diffuse>0.93 0.75 0.62 1</diffuse></material>
+      </visual>
+      <collision name="middle_collision">
+        <pose>-0.008 0.073 0.01 0 0 0</pose>
+        <geometry><box><size>0.017 0.066 0.018</size></box></geometry>
+      </collision>
+      <visual name="middle_visual">
+        <pose>-0.008 0.073 0.01 0 0 0</pose>
+        <geometry><box><size>0.017 0.066 0.018</size></box></geometry>
+        <material><ambient>0.93 0.75 0.62 1</ambient><diffuse>0.93 0.75 0.62 1</diffuse></material>
+      </visual>
+      <collision name="ring_collision">
+        <pose>0.01 0.07 0.01 0 0 0</pose>
+        <geometry><box><size>0.016 0.06 0.018</size></box></geometry>
+      </collision>
+      <visual name="ring_visual">
+        <pose>0.01 0.07 0.01 0 0 0</pose>
+        <geometry><box><size>0.016 0.06 0.018</size></box></geometry>
+        <material><ambient>0.93 0.75 0.62 1</ambient><diffuse>0.93 0.75 0.62 1</diffuse></material>
+      </visual>
+      <collision name="little_collision">
+        <pose>0.027 0.06 0.01 0 0 0</pose>
+        <geometry><box><size>0.014 0.045 0.016</size></box></geometry>
+      </collision>
+      <visual name="little_visual">
+        <pose>0.027 0.06 0.01 0 0 0</pose>
+        <geometry><box><size>0.014 0.045 0.016</size></box></geometry>
+        <material><ambient>0.93 0.75 0.62 1</ambient><diffuse>0.93 0.75 0.62 1</diffuse></material>
+      </visual>
+      <collision name="thumb_collision">
+        <pose>-0.05 0.01 0.01 0 0 0.6</pose>
+        <geometry><box><size>0.018 0.05 0.018</size></box></geometry>
+      </collision>
+      <visual name="thumb_visual">
+        <pose>-0.05 0.01 0.01 0 0 0.6</pose>
+        <geometry><box><size>0.018 0.05 0.018</size></box></geometry>
+        <material><ambient>0.93 0.75 0.62 1</ambient><diffuse>0.93 0.75 0.62 1</diffuse></material>
+      </visual>
+      <visual name="wrist_visual">
+        <pose>0 -0.075 0.04 0.6 0 0</pose>
+        <geometry><cylinder><radius>0.028</radius><length>0.10</length></cylinder></geometry>
+        <material><ambient>0.93 0.75 0.62 1</ambient><diffuse>0.93 0.75 0.62 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+</sdf>

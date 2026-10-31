@@ -1,0 +1,56 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python-tests:
+    # ROS-free unit tests (pa_core and the pure-Python parts of the other packages).
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pymunk numpy pyyaml opencv-python-headless pytest
+          # pa_perception CNN detector tests (onnx builds tiny test models on the fly)
+          pip install onnxruntime onnx
+          # tools/ tests (video cards and assembly)
+          pip install pillow
+          command -v ffmpeg >/dev/null || { sudo apt-get update -q && sudo apt-get install -y -q ffmpeg; }
+
+      - name: Run pytest per package
+        shell: bash
+        run: |
+          set -u
+          status=0
+          for dir in ros2_ws/src/pa_core ros2_ws/src/pa_perception ros2_ws/src/pa_planner \
+                     ros2_ws/src/pa_gazebo ros2_ws/src/pa_description host tools; do
+            if [ ! -d "$dir" ]; then
+              echo "::notice::skip $dir (not present)"
+              continue
+            fi
+            echo "::group::pytest $dir"
+            rc=0
+            # Packages import each other (pa_gazebo/tools use pa_perception, pa_planner).
+            PYTHONPATH="ros2_ws/src/pa_core:ros2_ws/src/pa_perception:ros2_ws/src/pa_planner:ros2_ws/src/pa_gazebo:$dir${PYTHONPATH:+:$PYTHONPATH}" \
+              python -m pytest -q "$dir" || rc=$?
+            echo "::endgroup::"
+            if [ "$rc" -eq 5 ]; then
+              echo "::notice::no tests collected in $dir"
+            elif [ "$rc" -ne 0 ]; then
+              echo "::error::pytest failed in $dir (exit $rc)"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Closed-loop smoke test (2D model)
+        run: PYTHONPATH=ros2_ws/src/pa_core python tools/sim2d_closed_loop.py --letters IU --trials 2 --max-pushes 10

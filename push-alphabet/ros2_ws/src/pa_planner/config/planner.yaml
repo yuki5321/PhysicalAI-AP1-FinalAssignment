@@ -1,0 +1,20 @@
+planner_node:
+  ros__parameters:
+    settle_s: 0.5         # wait after /push_done before trusting /letters
+    hand_clear_s: 1.0     # hand must be gone this long before recovering
+    max_pushes: 30
+    hand_timeout_s: 1.0   # /hand/state older than this = no hand
+    push_timeout_s: 20.0   # point pusher: park -> lower -> stroke -> lift -> park
+    lost_timeout_s: 3.0
+    min_confidence: 0.3
+    explore: 0.3
+    stall_pushes: 3
+    start_if_misaligned: true
+    done_margin: 0.8      # done when within 0.8x of the scene tolerances (perception noise margin)
+    mismatch_pos: 0.015   # observed vs. predicted pose after a push differs by more than this [m]
+    mismatch_ang_deg: 20.0  # ... or this [deg] ...
+    mismatch_count: 3     # ... for this many pushes in a row -> warning (check perception)
+    tick_hz: 20.0
+    # pusher ("paddles" | "point") is NOT set here: it comes from the launch argument
+    # (default "" = scene.yaml pusher_mode). point_speed: 0 = scene.yaml point_pusher.speed
+    point_speed: 0.0
